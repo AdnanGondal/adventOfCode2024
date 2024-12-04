@@ -1,8 +1,17 @@
 package org.adnangondal.day2;
 
+import org.adnangondal.util.DataReader;
+
 import java.util.List;
 
 public class RedNosedReports {
+
+    public static void main(String[] args) throws Exception {
+        List<List<Integer>> inputs = DataReader.readDay2NubersFromFile("day2/data.txt");
+        RedNosedReports rnr = new RedNosedReports();
+        System.out.println(rnr.getNumberOfSafeReports(inputs));
+
+    }
 
     public int getNumberOfSafeReports(List<List<Integer>> reports){
         int safeReports = 0;
