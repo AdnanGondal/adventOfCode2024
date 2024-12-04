@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class DataReader {
-    public static List<List<Integer>> readNumbersFromFile(String fileName) {
+    public static List<List<Integer>> readDay1NumbersFromFile(String fileName) {
         List<Integer> firstList = new ArrayList<>();
         List<Integer> secondList = new ArrayList<>();
         List<List<Integer>> result = new ArrayList<>();
@@ -29,5 +29,26 @@ public class DataReader {
         result.add(firstList);
         result.add(secondList);
         return result;
+    }
+
+    public static List<List<Integer>> readDay2NubersFromFile(String filePath) {
+        List<List<Integer>> result = new ArrayList<>();
+
+        try (
+                InputStream is = DataReader.class.getClassLoader().getResourceAsStream(filePath);
+                BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    List<Integer> numbers = Arrays.stream(line.split("\\s+"))
+                                .map(Integer::parseInt)
+                                .collect(Collectors.toList());
+                    result.add(numbers);
+                    }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+
     }
 }

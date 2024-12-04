@@ -8,7 +8,7 @@ import java.util.List;
 public class HystorianHysteria {
 
     public static void main(String[] args) throws Exception {
-        List<List<Integer>> inputs = DataReader.readNumbersFromFile("data.txt");
+        List<List<Integer>> inputs = DataReader.readDay1NumbersFromFile("day1/data.txt");
         System.out.println("Total distance is "+ getTotalDistance(inputs.get(0), inputs.get(1)));
     }
 
