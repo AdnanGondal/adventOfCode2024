@@ -36,23 +36,13 @@ public class RedNosedReports {
             return true;
         }
 
-        boolean isIncreasing = reports.get(1)-reports.get(0) > 0 ? true : false;
+        boolean isIncreasing = reports.get(1) - reports.get(0) > 0;
 
         for (int i=0;i<n-1;i++){
             int diff = (reports.get(i+1)-reports.get(i));
 
-            if (isIncreasing){
-                if (diff < 0){
+            if (isIncreasing && diff < 0 || !isIncreasing && diff > 0 || Math.abs(diff) < 1 || Math.abs(diff) > 3 ){
                     return false;
-                }
-            } else {
-                if (diff > 0){
-                    return false;
-                }
-            }
-
-            if (Math.abs(diff) < 1 || Math.abs(diff) > 3 ){
-                return false;
             }
         }
 
