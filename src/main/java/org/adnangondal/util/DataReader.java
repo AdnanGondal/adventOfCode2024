@@ -1,6 +1,7 @@
 package org.adnangondal.util;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -51,4 +52,28 @@ public class DataReader {
         return result;
 
     }
-}
+
+    public static String readDay3FromFile(String filepath) {
+        StringBuilder contentBuilder = new StringBuilder();
+
+        try (InputStream is = DataReader.class.getClassLoader().getResourceAsStream(filepath);
+             BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+
+            if (is == null) {
+                throw new IOException("File not found: " + filepath);
+            }
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                contentBuilder.append(line).append(System.lineSeparator());
+            }
+        } catch (IOException e) {
+            // Handle the exception (e.g., log it)
+            System.err.println("Error reading file: " + e.getMessage());
+            return ""; // Return an empty string on error
+        }
+
+        return contentBuilder.toString();
+    }
+
+    };
