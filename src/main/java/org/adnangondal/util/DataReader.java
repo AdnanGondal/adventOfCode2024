@@ -71,5 +71,23 @@ public class DataReader {
 
     return contentBuilder.toString();
   }
+
+  public static String[][] readDay4FromFile(String filepath) {
+    List<String[]> rows = new ArrayList<>();
+
+    try (InputStream is = DataReader.class.getClassLoader().getResourceAsStream(filepath);
+        BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+      String line;
+      while ((line = br.readLine()) != null) {
+        if (!line.trim().isEmpty()) {
+          rows.add(line.split(""));
+        }
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    return rows.toArray(new String[0][]);
+  }
 }
-;
+

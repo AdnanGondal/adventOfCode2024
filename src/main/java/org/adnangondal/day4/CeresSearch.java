@@ -1,6 +1,15 @@
 package org.adnangondal.day4;
 
+import org.adnangondal.day3.MullItOver;
+import org.adnangondal.util.DataReader;
+
 public class CeresSearch {
+
+  public static void main(String[] args) throws Exception {
+    String[][] inputs = DataReader.readDay4FromFile("day4/data.txt");
+    CeresSearch ceresSearch = new CeresSearch();
+    System.out.println(ceresSearch.wordSearch(inputs));
+  }
 
   String TARGET = "XMAS";
 
