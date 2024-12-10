@@ -1,5 +1,6 @@
 package org.adnangondal.day5;
 
+import java.util.Arrays;
 import java.util.List;
 import javafx.util.Pair;
 
@@ -12,11 +13,37 @@ public class PrintQueue {
     for (String pageNumbers : pageNumbersList) {
       sum += getMidpointIfValid(rules, pageNumbers);
     }
-    return 0;
+    return sum;
   }
 
   protected static int getMidpointIfValid(List<Pair<String, String>> rules, String pageNumbers) {
+    if (pageNumbers.isEmpty()) return 0;
+    int[] nums = Arrays.stream(pageNumbers.split(",")).mapToInt(Integer::parseInt).toArray();
 
-    return 0;
+    for (Pair<String, String> rule : rules){
+      if (!validateRuleAgainstNumbers(rule, nums)){
+        return 0;
+      }
+    }
+
+    return nums[nums.length/2];
+  }
+
+  private static boolean validateRuleAgainstNumbers(Pair<String, String> rule, int[] nums) {
+    int firstNum = Integer.parseInt(rule.getKey());
+    int secondNum = Integer.parseInt(rule.getValue());
+    int firstNumIndex = -1;
+    int secondNumIndex = -1;
+
+    for (int i=0;i<nums.length ; i++ ){
+      if (nums[i]==firstNum){
+        firstNumIndex = i;
+      }
+      if (nums[i]==secondNum){
+        secondNumIndex = i;
+      }
+    }
+
+    return firstNumIndex == -1 || secondNumIndex == -1 || secondNumIndex >= firstNumIndex;
   }
 }
