@@ -3,8 +3,18 @@ package org.adnangondal.day5;
 import java.util.Arrays;
 import java.util.List;
 import javafx.util.Pair;
+import org.adnangondal.util.DataReader;
 
 public class PrintQueue {
+
+  public static void main(String[] args) throws Exception {
+    List<Pair<String, String>> rules = DataReader.parseRulesFromFile_day5("day5/rules.txt");
+    List<String> pageNumbersList = DataReader.parsePageNumbersFromFile_day5("day5/pageNumbers.txt");
+
+    PrintQueue pq = new PrintQueue();
+    System.out.println( pq.getSumOfValidMiddlePages(rules, pageNumbersList));
+
+  }
 
   public int getSumOfValidMiddlePages(
       List<Pair<String, String>> rules, List<String> pageNumbersList) {
