@@ -8,7 +8,14 @@ public class LabMap {
   }
 
   public boolean isObstacle(Position position) {
-    return grid[position.getX()][position.getY()] == '#';
+    int x = position.getX();
+    int y = position.getY();
+
+    if (x < 0 || y < 0 || x>= grid.length || y >= grid[0].length){
+      return false;
+    }
+
+    return grid[x][y] == '#';
   }
 
   public boolean isInsideMap(Position position) {
