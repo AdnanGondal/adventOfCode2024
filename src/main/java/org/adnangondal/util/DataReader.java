@@ -139,5 +139,23 @@ public class DataReader {
 
     return pageNumbers;
   }
+
+  public static char[][] parseGrid_day6(String filename) {
+    List<char[]> gridList = new ArrayList<>();
+
+    try (InputStream is = DataReader.class.getClassLoader().getResourceAsStream(filename);
+         BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+
+      String line;
+      while ((line = br.readLine()) != null) {
+        gridList.add(line.toCharArray());
+      }
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    return gridList.toArray(new char[gridList.size()][]);
+  }
 }
 
