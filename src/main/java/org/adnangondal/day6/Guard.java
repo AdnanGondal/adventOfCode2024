@@ -44,12 +44,13 @@ public class Guard {
     return position;
   }
 
-  public void move(LabMap map) {
+  public Position  move(LabMap map) {
     Position nextPosition = position.move(direction);
     if (map.isObstacle(nextPosition)) {
       direction = direction.turnRight();
     } else {
       position = nextPosition;
     }
+    return position;
   }
 }

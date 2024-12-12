@@ -17,14 +17,12 @@ public class GuardGallivant {
     Set<Position> distPositions = new HashSet<>();
 
     while (labMap.isInsideMap(guard.getPosition())) {
-      guard.move(labMap);
-      if (!labMap.isInsideMap(guard.getPosition())){
+      if (!labMap.isInsideMap(guard.move(labMap))){
         break;
       }
       distPositions.add(guard.getPosition());
 
     }
-
 
     return distPositions.size();
   }
