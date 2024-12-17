@@ -2,9 +2,8 @@ package org.adnangondal.day7;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 class BridgeRepairTest {
@@ -12,29 +11,29 @@ class BridgeRepairTest {
   @Test
   void test_getValueMethod_returns_0_onEmptyList() {
 
-    assertEquals(0, BridgeRepair.getValueIfValid(0, List.of()));
+    assertEquals(0, BridgeRepair.getValueIfValid(0L, List.of()));
   }
 
   @Test
   void test_getValueMethod_returns_correctResult_whenMultiply() {
-    Integer testValue = 190;
-    List<Integer> operands = List.of(10, 19);
+    Long testValue = 190L;
+    List<Long> operands = List.of(10L, 19L);
 
     assertEquals(testValue, BridgeRepair.getValueIfValid(testValue, operands));
   }
 
   @Test
   void test_getValueMethod_returnsCorrectResult_whenInvalidOperands() {
-    Integer testValue = 83;
-    List<Integer> operands = List.of(17, 5);
+    Long testValue = 83L;
+    List<Long> operands = List.of(17L, 5L);
 
     assertEquals(0, BridgeRepair.getValueIfValid(testValue, operands));
   }
 
   @Test
   void test_getValueMethod_returns_correctResult_whenMixedOperands() {
-    Integer testValue = 3267;
-    List<Integer> operands = List.of(81, 40, 27);
+    Long testValue = 3267L;
+    List<Long> operands = List.of(81L, 40L, 27L);
 
     assertEquals(testValue, BridgeRepair.getValueIfValid(testValue, operands));
   }
@@ -42,25 +41,25 @@ class BridgeRepairTest {
   @Test
   void test_getCalibrationResult_returnsCorrectResult() {
 
-    Map<Integer, List<Integer>> calibrations = getTestCalibrationValues();
+    List<Equation> equations = getTestCalibrationValues();
     BridgeRepair br = new BridgeRepair();
 
-    Integer res = br.getTotalCalibration(calibrations);
+    Long res = br.getTotalCalibration(equations);
 
-    assertEquals(3749, res);
+    assertEquals(3749L, res);
   }
 
-  private Map<Integer, List<Integer>> getTestCalibrationValues() {
-    Map<Integer, List<Integer>> calibrations = new HashMap<>();
-    calibrations.put(190, List.of(10, 19));
-    calibrations.put(3267, List.of(81, 40, 27));
-    calibrations.put(83, List.of(17, 5));
-    calibrations.put(156, List.of(15, 6));
-    calibrations.put(7290, List.of(6, 8, 6, 15));
-    calibrations.put(161011, List.of(16, 10, 13));
-    calibrations.put(192, List.of(17, 8, 14));
-    calibrations.put(21037, List.of(9, 7, 18, 13));
-    calibrations.put(292, List.of(11, 6, 16, 20));
+  private List<Equation> getTestCalibrationValues() {
+    List<Equation> calibrations = new ArrayList<>();
+    calibrations.add(new Equation(190L, List.of(10L, 19L)));
+    calibrations.add(new Equation(3267L, List.of(81L, 40L, 27L)));
+    calibrations.add(new Equation(83L, List.of(17L, 5L)));
+    calibrations.add(new Equation(156L, List.of(15L, 6L)));
+    calibrations.add(new Equation(7290L, List.of(6L, 8L, 6L, 15L)));
+    calibrations.add(new Equation(161011L, List.of(16L, 10L, 13L)));
+    calibrations.add(new Equation(192L, List.of(17L, 8L, 14L)));
+    calibrations.add(new Equation(21037L, List.of(9L, 7L, 18L, 13L)));
+    calibrations.add(new Equation(292L, List.of(11L, 6L, 16L, 20L)));
 
     return calibrations;
   }

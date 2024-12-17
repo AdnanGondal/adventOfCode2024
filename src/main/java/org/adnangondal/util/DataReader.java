@@ -1,14 +1,10 @@
 package org.adnangondal.util;
 
-import javafx.util.Pair;
-
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
+import javafx.util.Pair;
+import org.adnangondal.day7.Equation;
 
 public class DataReader {
   public static List<List<Integer>> readDay1NumbersFromFile(String fileName) {
@@ -94,7 +90,8 @@ public class DataReader {
     return rows.toArray(new String[0][]);
   }
 
-  public static List<Pair<String, String>> parseRulesFromFile_day5(String fileName) throws IOException {
+  public static List<Pair<String, String>> parseRulesFromFile_day5(String fileName)
+      throws IOException {
     List<Pair<String, String>> rules = new ArrayList<>();
 
     // Get the input stream for the file in the resources folder
@@ -116,6 +113,7 @@ public class DataReader {
 
     return rules;
   }
+
   public static List<String> parsePageNumbersFromFile_day5(String fileName) throws IOException {
     List<String> pageNumbers = new ArrayList<>();
 
@@ -144,7 +142,7 @@ public class DataReader {
     List<char[]> gridList = new ArrayList<>();
 
     try (InputStream is = DataReader.class.getClassLoader().getResourceAsStream(filename);
-         BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+        BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
 
       String line;
       while ((line = br.readLine()) != null) {
@@ -157,5 +155,29 @@ public class DataReader {
 
     return gridList.toArray(new char[gridList.size()][]);
   }
-}
 
+  public static List<Equation> readDay7DataFromFile(String filename) {
+    List<Equation> equations = new ArrayList<>();
+
+    try (InputStream is = DataReader.class.getClassLoader().getResourceAsStream(filename);
+        BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+
+      String line;
+      while ((line = br.readLine()) != null) {
+
+        if (!line.trim().isEmpty()) {
+          String[] parts = line.split(": ");
+          long testValue = Long.parseLong(parts[0]);
+          List<Long> operands = Arrays.stream(parts[1].split(" ")).map(Long::parseLong).toList();
+          equations.add(new Equation(testValue, operands));
+        }
+      }
+
+    } catch (IOException e) {
+      System.err.println("Error parsing line:");
+      e.printStackTrace();
+    }
+
+    return equations;
+  }
+}
