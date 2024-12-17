@@ -16,14 +16,20 @@ public class BridgeRepair {
       return 0;
     }
 
-    List<Integer> results = new ArrayList<>();
+    Set<Integer> results = new HashSet<>();
     results.add(operands.getFirst());
 
     for (int i = 1; i < operands.size(); i++) {
-      List<Integer> newResults = new ArrayList<>();
+      Set<Integer> newResults = new HashSet<>();
       for (Integer result : results) {
-        newResults.add(result + operands.get(i));
-        newResults.add(result * operands.get(i));
+        Integer sum = result + operands.get(i);
+        Integer product = result * operands.get(i);
+
+        if (sum.equals(testValue) || product.equals(testValue)) {
+          return testValue;
+        }
+        newResults.add(sum);
+        newResults.add(product);
       }
       results = newResults;
     }
